@@ -1,0 +1,84 @@
+{
+  "name": "depth3d",
+  "productName": "depth3d",
+  "version": "1.0.0",
+  "description": "Generate 3d models by converting images into depth maps",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "publish": "electron-forge publish",
+    "lint": "echo \"No linting configured\""
+  },
+  "devDependencies": {
+    "@electron-forge/cli": "^7.6.0",
+    "@electron-forge/maker-deb": "^7.6.1",
+    "@electron-forge/maker-dmg": "^7.7.0",
+    "@electron-forge/maker-rpm": "^7.6.0",
+    "@electron-forge/maker-squirrel": "^7.6.0",
+    "@electron-forge/maker-zip": "^7.6.0",
+    "@electron-forge/plugin-auto-unpack-natives": "^7.6.0",
+    "@electron-forge/plugin-fuses": "^7.6.0",
+    "@electron/fuses": "^1.8.0",
+    "electron": "33.3.1"
+  },
+  "keywords": [],
+  "author": "anskky",
+  "license": "MIT",
+  "dependencies": {
+    "electron-dl": "^4.0.0",
+    "electron-squirrel-startup": "^1.0.1",
+    "python-shell": "^5.0.0",
+    "three": "^0.174.0",
+    "tweakpane": "^4.0.5"
+  },
+  "config": {
+    "forge": {
+      "packagerConfig": {
+        "icon": "./src/icons/icon"
+      },
+      "makers": [
+        {
+          "name": "@electron-forge/maker-deb",
+          "platforms": ["linux"],
+          "config": {
+            "options": {
+              "name": "depth3d",
+              "author": "anskky",
+              "homepage": "https://github.com/anskky/depth3d",
+              "icon": "./src/icons/icon.png"
+            }
+          }
+        },
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "platforms": ["win32"],
+          "config": {
+            "author": "anskky",
+            "homepage": "https://github.com/anskky/depth3d",
+            "icon": "./src/icons/icon.ico",
+            "setupIcon": "./src/icons/icon.ico",
+            "loadingGif": "./src/icons/icon_1024x1024_scaled.gif",
+            "name": "depth3d",
+            "setupExe": "depth3d_installation.exe",
+            "shortcutName": "depth3d",
+            "skipUpdateIcon": true,
+            "createDesktopShortcut": true
+          }
+        },
+        {
+          "name": "@electron-forge/maker-dmg",
+          "platforms": ["darwin"],
+          "config": {
+            "title": "depth3d",
+            "author": "anskky",
+            "homepage": "https://github.com/anskky/depth3d",
+            "icon": "./src/icons/icon.icns"
+          }
+        }
+      ]
+    }
+  }
+}
