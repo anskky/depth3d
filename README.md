@@ -4,7 +4,7 @@
 
 Depth3d allows you to transform JPEG, JPG, PNG images into 3D models using monocular depth estimation. You can select the desired depth estimation model, download it locally into depth3d, and use it to reconstruct a 3D model from an image. You can utilize built-in features to control the depth intensity, adjust the resolution and size, and export the 3D model in formats such as glTF, GLB, STL, OBJ.
 
-![depth3d_overview](https://github.com/user-attachments/assets/6964b5fe-c704-4268-bde0-fdf6861c6089)
+![depth3d_overview](https://github.com/user-attachments/assets/ba7a5062-c656-4c36-913c-add9dfc0dc05)
 
 ## Source Installation
 
