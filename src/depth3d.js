@@ -424,6 +424,7 @@ class DepthMapEditor {
     this._mesh = mesh;
     this.HTMLDepthMap = mesh.images.HTMLImageDepthMap;
     this.depthMap = null;
+    this.isActive = false;
     this._canvasDepthMap = document.createElement('canvas');
     this._context = this._canvasDepthMap.getContext('2d', {
       alpha: false,
@@ -461,11 +462,13 @@ class DepthMapEditor {
     this._mesh.material.map = planeMesh.images.threeAlbedoMap;
     this._mesh.material.flatShading = false;
     this._mesh.material.needsUpdate = true;
+    this.isActive = false;
   }
   depthMapEditorMode() {
     this.depthMap ? this._mesh.material.map = this.depthMap : this._mesh.material.map = this._mesh.images.threeDepthMap;
     this._mesh.material.flatShading = true;
     this._mesh.material.needsUpdate = true;
+    this.isActive = true;
     if (this._mesh.grayscaleDisplacement.isGrayscaleDisplacement) {
       this._mesh.updateGeometry();
       this.depthMap ? this._mesh.material.displacementMap = this.depthMap : this._mesh.material.displacementMap = this._mesh.images.threeDepthMap;
@@ -487,8 +490,10 @@ class DepthMapEditor {
   updateDisplacement() {
     const newDisplacement = new THREE.CanvasTexture(this._canvasDepthMap);
     newDisplacement.anisotropy = renderer.capabilities.getMaxAnisotropy();
-    this._mesh.material.displacementMap = newDisplacement;
-    this._mesh.material.map = newDisplacement;
+    if (this.isActive) {
+      this._mesh.material.displacementMap = newDisplacement;
+      this._mesh.material.map = newDisplacement;
+    }
     this.depthMap = newDisplacement;
   }
   resetToDefault() {
@@ -604,6 +609,7 @@ export async function reload(isUser) {
   tab.pages[0].children[10].children[0].value = 'glTF';
   pane.refresh();
   camera.position.setFromMatrixPosition(camera.matrixWorld);
+  planeMesh.depthMapEditor.resetToDefault();
   planeMesh.animation.appearanceDisplacementAnimation();
   planeMesh.animation.setZPositionToZero();
 }
